@@ -18,8 +18,8 @@ const Navbar: React.FC = () => {
           <a href="#home" className="text-gray-600 hover:text-gray-800">
             Home
           </a>
-          <a href="#about" className="text-gray-600 hover:text-gray-800">
-            About
+          <a className="text-gray-600 hover:text-gray-800">
+            <button className="button-primary">Login</button>
           </a>
           <a href="#services" className="text-gray-600 hover:text-gray-800">
             Services
