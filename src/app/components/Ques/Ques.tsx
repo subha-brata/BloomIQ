@@ -3,7 +3,7 @@ import './DashboardStyles.css';
 
 interface NoteProps {
   title: string;
-  content: string;
+  content: string[];
   pinned?: boolean;
   togglePin?: () => void; 
 }
@@ -18,9 +18,9 @@ const Note: React.FC<NoteProps> = ({ title, content, pinned, togglePin }) => {
   return (
     <div className="note">
       <h2>{title}</h2>
-      {pinned?<p>{content}</p>:<p>{content.substring(0,50)}</p>}
+      {pinned?<p>{content.map((i,key)=><p>{key}.{i}</p>)}</p>:<p>{content[0]}</p>}
       
-      {pinned !== undefined && content.length>50 &&(
+      {pinned !== undefined && content.length>1 &&(
         <button onClick={handleTogglePin}>{pinned ? 'Show less' : '...Show More'}</button>
       )}
     </div>

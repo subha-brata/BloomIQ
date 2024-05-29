@@ -1,7 +1,6 @@
 "use client"
 import React, { useState, useContext } from 'react';
 import { useAuth } from '../state/AuthContext';
-import { useRouter } from 'next/navigation';
 import "./LoginStyles.css"
 import Link from 'next/link';
 
@@ -9,12 +8,13 @@ const Login: React.FC = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const {login}= useAuth();
-  const router = useRouter();
+
 
   const handleSubmit = (e: React.FormEvent) => {
     console.log(`login button clicked`);
     e.preventDefault();
-    login();
+    if(username && password)
+    login(username);
   };
 
   return (

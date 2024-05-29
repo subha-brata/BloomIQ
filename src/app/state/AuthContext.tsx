@@ -4,8 +4,8 @@ import { useRouter } from 'next/navigation';
 
 interface AuthContextType {
   isAuthenticated: boolean;
-  login: () => void;
-  logout: () => void;
+  login: (userid:string) => boolean;
+  logout: (uerid:string) => boolean;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -14,14 +14,16 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const router = useRouter();
 
-  const login = () => {
+  const login = (userid:string) => {
     setIsAuthenticated(true);
-    router.push('/profile');
+    router.push(`/dashboard/${userid}`);
+    return isAuthenticated;
   };
 
-  const logout = () => {
+  const logout = (userid:string) => {
     setIsAuthenticated(false);
     router.push('/login');
+    return isAuthenticated;
   };
 
   return (

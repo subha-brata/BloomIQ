@@ -2,8 +2,9 @@
 import React, { useState } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 import './Navbar.css';
+import Link from "next/link";
 
-const Navbar: React.FC = () => {
+const Navbar:React.FC<{login:boolean}>= (login) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -23,18 +24,8 @@ const Navbar: React.FC = () => {
             }
         }>IQ</div></div>
         <div className="hidden md:flex space-x-6">
-          <a href="#home" className="text-gray-600 hover:text-gray-200">
-            Home
-          </a>
-          <a className="text-gray-600 hover:text-gray-200">
-            <button className="button-primary">Login</button>
-          </a>
-          <a href="#services" className="text-gray-600 hover:text-gray-200">
-            Services
-          </a>
-          <a href="#contact" className="text-gray-600 hover:text-gray-200">
-            Contact
-          </a>
+          {login && <Link href='/login' replace>Log out</Link>}
+
         </div>
         <div className="md:hidden flex items-center">
           <button
