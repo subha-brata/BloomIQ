@@ -1,5 +1,5 @@
 .form-container {
-    min-width: 400px;
+    min-width: 200px;
     width:25%;
     top:50%;
     left:50%;
@@ -30,9 +30,9 @@
   
   .form-group input {
     width: calc(100% - 20px);
-    padding: 8px 10px;  
-    background-color: #4d4d4d;
-    border-radius: 10px;
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
   }
   
   .form-group input:focus {
@@ -55,10 +55,5 @@
   
   .button-container button:hover {
     background-color: #0056b3;
-  }
-  .check{
-    background-color: #4d4d4d;
-    color:#0056b3;
-    margin:5px;
   }
   

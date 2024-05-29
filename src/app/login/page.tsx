@@ -1,6 +1,6 @@
 "use client"
 import React, { useState, useContext } from 'react';
-import { AuthContext } from '../state/AuthContext';
+import { useAuth } from '../state/AuthContext';
 import { useRouter } from 'next/navigation';
 import "./LoginStyles.css"
 import Link from 'next/link';
@@ -8,15 +8,13 @@ import Link from 'next/link';
 const Login: React.FC = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const authContext = useContext(AuthContext);
+  const {login}= useAuth();
   const router = useRouter();
 
   const handleSubmit = (e: React.FormEvent) => {
+    console.log(`login button clicked`);
     e.preventDefault();
-    if (authContext) {
-      authContext.login();
-      router.push('/profile');
-    }
+    login();
   };
 
   return (
@@ -24,10 +22,11 @@ const Login: React.FC = () => {
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label>Username:</label>
+          <label>e-mail:</label>
           <input
-            type="text"
+            type="email"
             value={username}
+            placeholder='jondoe2024@gmail.com'
             onChange={(e) => setUsername(e.target.value)}
           />
         </div>
@@ -35,6 +34,7 @@ const Login: React.FC = () => {
           <label>Password:</label>
           <input
             type="password"
+            placeholder='password'
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
@@ -42,7 +42,16 @@ const Login: React.FC = () => {
         <div className="button-container">
           <button type="submit">Login</button>
         </div>
-        <Link href="/signup">Sign UP</Link>
+        <br></br>
+        <h6 style={
+          {
+            textAlign:"center"
+          }
+        }>Don't have an account??<Link href="/signup"
+        style={{
+         fontWeight:"600",
+         color:"blue"
+        }}>Sign up</Link></h6>
       </form>
     </div>
   );

@@ -1,4 +1,6 @@
-import React, { createContext, useState, ReactNode } from 'react';
+"use client"
+import { createContext, useState, ReactNode, useContext } from 'react';
+import { useRouter } from 'next/navigation';
 
 interface AuthContextType {
   isAuthenticated: boolean;
@@ -8,11 +10,19 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const router = useRouter();
 
-  const login = () => setIsAuthenticated(true);
-  const logout = () => setIsAuthenticated(false);
+  const login = () => {
+    setIsAuthenticated(true);
+    router.push('/profile');
+  };
+
+  const logout = () => {
+    setIsAuthenticated(false);
+    router.push('/login');
+  };
 
   return (
     <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
@@ -21,4 +31,10 @@ const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   );
 };
 
-export { AuthContext, AuthProvider };
+export const useAuth = () => {
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error('useAuth must be used within an AuthProvider');
+  }
+  return context;
+};

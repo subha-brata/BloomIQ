@@ -1,0 +1,79 @@
+span{
+    font-size: small;
+    color:#bdc1c6;
+    font-weight: 800;
+}
+
+  
+  .note-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+    background-color: #1e1e1e;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    width:50%;
+    min-width: 300px;
+    text-align: center;
+    margin:10px auto;
+  }
+  
+  .note-form input,
+  .note-form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #333;
+    border-radius: 4px;
+    background-color: #2c2c2c;
+    color: #e8eaed;
+  }
+  
+  .note-form input:focus,
+  .note-form textarea:focus {
+    outline: none;
+    border-color: #4285f4;
+  }
+  
+  .note-form button {
+    align-self: flex-end;
+    padding: 10px 20px;
+    border: none;
+    background-color: #4285f4;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .note-form button:hover {
+    background-color: #357ae8;
+  }
+  
+  /* Notes grid styles */
+  .notes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+  }
+  
+  /* Note component styles */
+  .note {
+    background-color: #1e1e1e;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    color: #e8eaed;
+  }
+  
+  .note h2 {
+    margin: 0 0 10px 0;
+    font-size: 18px;
+  }
+  
+  .note p {
+    margin: 0;
+    font-size: 14px;
+    color: #bdc1c6;
+  }
+  

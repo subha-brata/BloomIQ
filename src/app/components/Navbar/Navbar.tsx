@@ -11,20 +11,28 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <nav className="shadow-md fixed w-full z-10">
+    <nav className="shadow-md stickty w-full z-10">
       <div className="container mx-auto px-4 py-3 flex justify-between items-center">
-        <div className="text-gray-400 logo">Bloom IQ</div>
+        <div className="text-gray-400 logo">Bloom <div
+        style={
+            {
+                display:"inline",
+                color:"blue",
+                fontWeight:"600",
+                fontSize:"32px"
+            }
+        }>IQ</div></div>
         <div className="hidden md:flex space-x-6">
-          <a href="#home" className="text-gray-600 hover:text-gray-800">
+          <a href="#home" className="text-gray-600 hover:text-gray-200">
             Home
           </a>
-          <a className="text-gray-600 hover:text-gray-800">
+          <a className="text-gray-600 hover:text-gray-200">
             <button className="button-primary">Login</button>
           </a>
-          <a href="#services" className="text-gray-600 hover:text-gray-800">
+          <a href="#services" className="text-gray-600 hover:text-gray-200">
             Services
           </a>
-          <a href="#contact" className="text-gray-600 hover:text-gray-800">
+          <a href="#contact" className="text-gray-600 hover:text-gray-200">
             Contact
           </a>
         </div>
@@ -49,5 +57,3 @@ const Navbar: React.FC = () => {
   );
 };
 export default Navbar;
-
-
