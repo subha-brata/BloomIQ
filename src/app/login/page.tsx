@@ -3,6 +3,7 @@ import React, { useState, useContext } from 'react';
 import { useAuth } from '../state/AuthContext';
 import "./LoginStyles.css"
 import Link from 'next/link';
+import axios from 'axios';
 
 const Login: React.FC = () => {
   const [username, setUsername] = useState('');

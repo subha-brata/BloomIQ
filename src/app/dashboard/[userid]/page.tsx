@@ -4,7 +4,7 @@ import "../dashboard.css";
 import Ques from "../../components/Ques/Ques";
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import Navbar from "../../components/Navbar/Navbar";
-import AddCircleIcon from '@mui/icons-material/AddCircle';
+import AddCircleIcon from '@mui/icons-material/Add';
 
 
 const Dashboard:React.FC<{login:boolean}>= ({login}) => {
@@ -65,7 +65,7 @@ const Dashboard:React.FC<{login:boolean}>= ({login}) => {
             <div className="delete" onClick={() => handleRemoveQuestion(index)}><DeleteOutlineIcon></DeleteOutlineIcon></div>
           </div>
         ))}
-        <button  onClick={handleAddQuestion}><AddCircleIcon></AddCircleIcon></button>
+        <div style={{cursor:"pointer", color:"white", textAlign:"right"}}  onClick={handleAddQuestion}><AddCircleIcon fontSize="large"></AddCircleIcon></div>
         <button type="submit" onClick={handleAddNote}>Analyse</button>
       </form>
       <span>Previous questions</span>

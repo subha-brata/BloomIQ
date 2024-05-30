@@ -2,13 +2,14 @@
 import React, { useState } from 'react';
 import {useRouter} from 'next/navigation';
 import "./signupstyles.css";
+import axios from 'axios';
 
 const Signup: React.FC = () => {
   const [username, setUsername] = useState('');
   const [email, setemail] = useState('');
   const [password, setPassword] = useState('');
   const [isAdmin,setisAdmin]=useState(false);
-  const history = useRouter();
+  const router = useRouter();
 
   const user={
     name:username,
@@ -16,10 +17,15 @@ const Signup: React.FC = () => {
     password: password,
     isAdmin:isAdmin
   }
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    history.push('/login');
+  const handleSubmit = async (e: React.FormEvent) => {
+    try {
+      const res=await axios.post("/api/signup",user);
+      console.log(res);
+      router.push('/login');  
+    } catch (error) {
+      console.log(error);
+    }
+    
   };
 
   return (
@@ -56,7 +62,7 @@ const Signup: React.FC = () => {
         </div>
         <div>
           <label>Register as admin</label>
-          <input type='checkbox' name='admin' value='admin' className='check'></input>
+          <input type='checkbox'  checked={isAdmin} onChange={(e)=>setisAdmin(e.target.checked)}></input>
           
         </div>
         <div className="button-container">
