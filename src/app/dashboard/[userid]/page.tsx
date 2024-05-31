@@ -5,13 +5,21 @@ import Ques from "../../components/Ques/Ques";
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import Navbar from "../../components/Navbar/Navbar";
 import AddCircleIcon from '@mui/icons-material/Add';
+import axios from "axios";
+import { toast } from "react-toastify";
 
 
-const Dashboard:React.FC<{login:boolean}>= ({login}) => {
+const Dashboard:React.FC<{isAuthenticated:boolean,email:string,logout:boolean}>= ({isAuthenticated,email,logout}) => {
   const [notes, setNotes] = useState<{ title: string; questions: string[]; pinned: boolean }[]>([]);
   const [title, setTitle] = useState("");
   const [questions, setQuestions] = useState([""]);
 
+
+  const questionInput={
+    email:email,
+    title:title,
+    quesions: questions
+  }
   const handleInputChange = (index: number, event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const values = [...questions];
     values[index] = event.target.value;
@@ -28,14 +36,18 @@ const Dashboard:React.FC<{login:boolean}>= ({login}) => {
     setQuestions(values);
   };
 
-  const handleAddNote = (e: React.FormEvent) => {
+  const handleAddNote = async (e: React.FormEvent) => {
     console.log(`title:${title}, question:${questions}`);
-    e.preventDefault();
-    if (title && questions.some((question) => question)) {
-      setNotes([...notes, { title, questions, pinned: false }]);
-      setTitle("");
-      setQuestions([""]);
+    try {
+      e.preventDefault();
+      const res=await axios.post('/api/analyse',questionInput);
+      if(res.data.status===200) toast('Done');
+
+    } catch (error) {
+      console.log(error);
+      toast.error('Something Wrong!!');
     }
+    
 
   };
 
@@ -47,7 +59,7 @@ const Dashboard:React.FC<{login:boolean}>= ({login}) => {
 
   return (
     <>
-    <Navbar login={login}></Navbar>
+    <Navbar login={isAuthenticated}></Navbar>
     <div className="main-content">
       <form className="note-form" onSubmit={handleAddNote}>
         <input type="text"

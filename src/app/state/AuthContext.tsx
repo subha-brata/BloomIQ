@@ -2,11 +2,13 @@
 import { createContext, useState, ReactNode, useContext } from 'react';
 import { useRouter } from 'next/navigation';
 
+
+
 interface AuthContextType {
   isAuthenticated: boolean;
-  login: (userid:string) => boolean;
+  login: (email:string,userName:string) => string
   logout: (uerid:string) => boolean;
-}
+};
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
@@ -14,10 +16,10 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const router = useRouter();
 
-  const login = (userid:string) => {
+  const login = (name:string,email:string) => {
     setIsAuthenticated(true);
-    router.push(`/dashboard/${userid}`);
-    return isAuthenticated;
+    router.push(`/dashboard/${name}`);
+    return email;
   };
 
   const logout = (userid:string) => {

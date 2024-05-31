@@ -1,21 +1,35 @@
 "use client"
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { useAuth } from '../state/AuthContext';
 import "./LoginStyles.css"
 import Link from 'next/link';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const Login: React.FC = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const {login}= useAuth();
+  const user={
+    email:username,
+    password:password
+  }
 
-
-  const handleSubmit = (e: React.FormEvent) => {
-    console.log(`login button clicked`);
-    e.preventDefault();
-    if(username && password)
-    login(username);
+  const handleSubmit = async (e: React.FormEvent) => {
+// psots the api to the user structure 
+    try {
+      e.preventDefault();
+      const res= await axios.post('/api/login',user);
+      if(res.data.status===200){
+        toast.success(`Login Successful`);
+        login(res.data.user.name, res.data.user.email); // comes from the useAuth
+        console.log(res.data.user);
+      }
+      if(res.data.status===201) toast.warning(res.data.message);
+    } catch (error) {
+      console.log(error);
+      toast.error('Some problem is there');
+    }
   };
 
   return (

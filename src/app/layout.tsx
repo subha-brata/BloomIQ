@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "./state/AuthContext";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/ReactToastify.css";
+
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,8 +21,20 @@ export default function RootLayout({
   return (
     <html lang="en">
       
-        <body className={inter.className}><AuthProvider>{children}</AuthProvider></body>
-      
+        <body className={inter.className}><AuthProvider>{children}</AuthProvider>
+        <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
+      </body>
     </html>
   );
 }
