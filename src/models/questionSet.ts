@@ -9,21 +9,33 @@ const questionSetSchema= new mongoose.Schema({
         type:String,
         require:true
     },
-    question:[{
-        question:{
+    title:{
+        type:String
+    },
+    pinned:{
+        type:String,
+        default:true
+    },
+    questions:[{
+        text:{
             type:String
+        },
+        label:{
+            type:String,
+            default:'level 1'
         },
         confidence:{
             type:Number,
             default:1
         },
-        label:{
-            type:String,
-            default:'level 1'
+        bloom_level:{
+            type:Number,
+            default:0
         }
-
+        
+        
     }]
-})
+});
 const questionSet=mongoose.models.qs || mongoose.model("qs",questionSetSchema);
 
 export default questionSet;

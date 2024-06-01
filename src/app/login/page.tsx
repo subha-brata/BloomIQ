@@ -9,20 +9,21 @@ import { toast } from 'react-toastify';
 const Login: React.FC = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const {login}= useAuth();
+  const {login}= useAuth(); // from Auth COntext
+  //user structure for finding the user
   const user={
     email:username,
     password:password
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
-// psots the api to the user structure 
+    // posts the api to the user structure 
     try {
       e.preventDefault();
       const res= await axios.post('/api/login',user);
       if(res.data.status===200){
         toast.success(`Login Successful`);
-        login(res.data.user.name, res.data.user.email); // comes from the useAuth
+        login(res.data.user.name, res.data.user.email); // sends to the useAuth
         console.log(res.data.user);
       }
       if(res.data.status===201) toast.warning(res.data.message);

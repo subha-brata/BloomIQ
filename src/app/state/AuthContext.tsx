@@ -1,12 +1,13 @@
 "use client"
-import { createContext, useState, ReactNode, useContext } from 'react';
+import { createContext, useState, ReactNode, useContext,useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
 
 
 interface AuthContextType {
   isAuthenticated: boolean;
-  login: (email:string,userName:string) => string
+  userName:String,
+  login: (email:string,userName:string) => void,
   logout: (uerid:string) => boolean;
 };
 
@@ -14,12 +15,23 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [userName,setuserName]=useState("");
   const router = useRouter();
+
+  useEffect(() => {
+    // Check if userName is in localStorage and update state
+    const storedUserName = localStorage.getItem('userName');
+    if (storedUserName) {
+      setIsAuthenticated(true);
+      setuserName(storedUserName);
+    }
+  }, []);
 
   const login = (name:string,email:string) => {
     setIsAuthenticated(true);
     router.push(`/dashboard/${name}`);
-    return email;
+    localStorage.setItem('userName', email);
+    setuserName(email);
   };
 
   const logout = (userid:string) => {
@@ -29,7 +41,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
+    <AuthContext.Provider value={{ isAuthenticated,userName, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

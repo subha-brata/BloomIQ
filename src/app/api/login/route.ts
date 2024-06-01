@@ -33,6 +33,11 @@ export async function POST(req:NextRequest){
             messege:`login successful`,
             status:200
         }); 
+        else return NextResponse.json({
+            user:null,
+            message:`password didn't match`,
+            status:201
+        });
         
     } catch (error) {
         return NextResponse.json({

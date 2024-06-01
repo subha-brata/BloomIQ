@@ -1,20 +1,25 @@
 import { NextRequest, NextResponse } from "next/server";
 import questionSet from "@/models/questionSet";
 import { qsConnect } from "@/dbConfig/qsDb";
+import { gen } from "@/utils/gen";
 
 qsConnect();
 
 export async function POST(req: NextRequest) {
-  const date = new Date();
   try {
-    const { title, questions } = await req.json();
+    const { email, time, title, questions } = await req.json();
+    const genOut=await gen(questions)
+    
     const qs = await new questionSet({
-      time: `on ${date.getDate()}/${date.getMonth()}/${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}`,
+      email,
+      time,
       title,
-      questions,
+      pinned:false,
+      questions:genOut
     }).save();
+    console.log(qs);
     return NextResponse.json({
-      message: "queston uploaded",
+      message: `questionSet uploaded ${qs}`,
       status: 200,
     });
   } catch (error) {
