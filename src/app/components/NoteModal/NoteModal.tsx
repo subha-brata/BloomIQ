@@ -94,7 +94,7 @@ const NoteModal: React.FC<NoteModalProps> = ({ time, title, questions, onClose }
       });
       
       // Normalize the score to be out of 100
-      score = (score / Object.keys(desiredRatios).length) * 100;
+      score = Math.round((score / Object.keys(desiredRatios).length) * 100);
       
       return score;
       
@@ -162,7 +162,7 @@ const NoteModal: React.FC<NoteModalProps> = ({ time, title, questions, onClose }
                 padding:"5px",
                 borderRadius:'5px',
                 width:'fit-content'
-              }}>{q.label}</div>
+              }}>{q.label}-{q.bloom_level}</div>
             </p>
           ))}
         </div>
