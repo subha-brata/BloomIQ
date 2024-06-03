@@ -70,7 +70,7 @@ const Login: React.FC = () => {
           {
             textAlign:"center"
           }
-        }>Don't have an account??<Link href="/register"
+        }>Don&apos;t have an account??<Link href="/register"
         style={{
          fontWeight:"600",
          color:"blue"

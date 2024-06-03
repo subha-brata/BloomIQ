@@ -13,8 +13,22 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   // Initialize state from localStorage if available
-  const [isAuthenticated, setIsAuthenticated] = useState(() => !!(localStorage.getItem('userName')));
-  const [userName, setUserName] = useState(() => localStorage.getItem('userName') || '');
+  const [isAuthenticated, setIsAuthenticated] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return !!(localStorage.getItem('userName'));
+    } else {
+      return false; // Handle the case when localStorage is not available
+    }
+  });
+  
+  const [userName, setUserName] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('userName') || '';
+    } else {
+      return ''; // Handle the case when localStorage is not available
+    }
+  });
+  
   const router = useRouter();
 
   useEffect(() => {
