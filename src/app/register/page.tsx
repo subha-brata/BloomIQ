@@ -31,8 +31,9 @@ const Signup: React.FC = () => {
       if (res.data.status === 201) toast.warning(res.data.message);
       if (res.data.status === 200) {
         toast.success(`SignUp Successful`);
-        router.push("/login");
       }
+      setTimeout(()=>{router.push("/login")},5000);
+      
     } catch (error) {
       console.log(error);
       toast.error(`Some Problem is there`);
