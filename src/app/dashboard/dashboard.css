@@ -24,8 +24,8 @@ span{
     width:50%;
     min-width: 300px;
     text-align: center;
+    height: 50vh;
     margin:10px auto;
-    max-height: 50vh;
     overflow-y: scroll;
   }
   
@@ -73,6 +73,10 @@ span{
     border-radius: 8px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
     color: #e8eaed;
+    cursor: pointer;
+  }
+  .note:hover{
+    transform: translate(-3%,-3%);
   }
   
   .note h2 {

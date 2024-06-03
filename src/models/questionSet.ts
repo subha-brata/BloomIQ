@@ -14,7 +14,7 @@ const questionSetSchema= new mongoose.Schema({
     },
     pinned:{
         type:String,
-        default:true
+        default:false
     },
     questions:[{
         text:{

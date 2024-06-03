@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import "./signupstyles.css";
 import { toast } from "react-toastify";
 import axios from "axios";
+import Page_Loader from "../components/loaders/Page_Loader";
 
 const Signup: React.FC = () => {
   const [username, setUsername] = useState("");
@@ -39,8 +40,8 @@ const Signup: React.FC = () => {
       setloading(false);
     }
   };
-
-  return (
+  if(loading) return <Page_Loader></Page_Loader>
+  else return (
     <div className="form-container">
       <h2>Signup</h2>
       <form onSubmit={handleSubmit}>

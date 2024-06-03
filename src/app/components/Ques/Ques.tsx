@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
+import NoteModal from '../NoteModal/NoteModal';
 import './DashboardStyles.css';
-
+import axios from 'axios';
 
 interface Question {
   text: String;
@@ -10,33 +11,45 @@ interface Question {
 }
 
 interface NoteProps {
-  date:String,
+  email:String,
+  time: String;
   title: String;
   questions: Question[];
   pinned?: Boolean;
-  togglePin?: () => void; 
+  togglePin?: () => void;
 }
 
-const Ques: React.FC<NoteProps> = ({ title,questions, pinned, togglePin }) => {
-  const handleTogglePin = () => {
-    if (togglePin) {
-      togglePin();
-    }
+const Ques: React.FC<NoteProps> = ({ email,time, title, questions }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
   };
 
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+  
+  
+
   return (
-    <div className="note">
-      <h2>{title}</h2>
-      {pinned 
-        ? <div>{questions.map((q, key) => (
-            <p key={key}>{key + 1}. {q.text} - {q.label} (Confidence: {q.Confidence}, Bloom Level: {q.bloom_level})</p>
-          ))}
-          </div>
-        : <p>{questions[0].text} - {questions[0].label} (Confidence: {questions[0].Confidence}, Bloom Level: {questions[0].bloom_level})</p>}
-      {pinned !== undefined && questions.length > 1 && (
-        <button onClick={handleTogglePin}>{pinned ? 'Show less' : '...Show More'}</button>
+    <>
+      <div className="note" onClick={handleOpenModal}>
+        <h2>{title}</h2>
+        <span>{time}</span>
+        <p>{questions[0].text.substring(0, 50)}...</p>
+      </div>
+      {isModalOpen && (
+        <NoteModal 
+          email={email}
+          title={title} 
+          questions={questions} 
+          time={time}
+          onClose={handleCloseModal}
+          
+        />
       )}
-    </div>
+    </>
   );
 };
 
