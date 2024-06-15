@@ -1,6 +1,6 @@
 # Bloom's Taxonomy Question Paper Scoring System
 
-![Bloom's Taxonomy Question Paper Scoring](./screenshots/hero.png)
+![Bloom's Taxonomy Question Paper Scoring](./BloomIQ.png)
 
 ## Table of Contents
 - [Introduction](#introduction)
@@ -29,13 +29,10 @@ This project is a web application built with Next.js, MongoDB, Chart.js, and Rea
 - ![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=white) : JavaScript library for building user interfaces.
 
 ## Screenshots
-![Dashboard](./screenshots/dashboard.png)
+![Dashboard](./dashboard.png)
 *Dashboard with overview of scores.*
 
-![Question Analysis](./screenshots/question-analysis.png)
-*Detailed question analysis with Bloom's Taxonomy.*
-
-![Chart Visualization](./screenshots/chart-visualization.png)
+![Chart Visualization](./chart.png)
 *Interactive chart showing question scores.*
 
 ## Installation
